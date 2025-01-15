@@ -96,7 +96,7 @@ function Filter({
 
       <Grid item xs={12}>
         <PublishedComponent
-          pubRef="location.DetailedLocationFilter"
+          pubRef="location.LocationFilter"
           withNull
           filters={filters}
           onChangeFilters={onChangeFilters}

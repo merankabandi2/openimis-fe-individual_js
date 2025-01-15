@@ -131,6 +131,7 @@ function GroupSearcher({
 
     if (rights.includes(RIGHT_GROUP_UPDATE)) {
       headers.push('emptyLabel');
+      headers.push('emptyLabel');
     }
     return headers;
   };

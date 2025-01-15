@@ -12,7 +12,7 @@ function IndividualFilter({
 
   const checkboxFields = [
     { name: 'isDeleted', label: 'isDeleted' },
-    { name: 'location_Isnull', label: 'hasNoLocation' },
+    // { name: 'location_Isnull', label: 'hasNoLocation' },
   ];
 
   return (

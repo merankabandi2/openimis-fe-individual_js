@@ -11,7 +11,7 @@ function GroupFilter({
   ];
 
   const checkboxFields = [
-    { name: 'location_Isnull', label: 'hasNoLocation' },
+    // { name: 'location_Isnull', label: 'hasNoLocation' },
   ];
 
   return (

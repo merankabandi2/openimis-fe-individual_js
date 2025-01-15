@@ -136,11 +136,13 @@ function GroupIndividualSearcher({
       'individual.firstName',
       'individual.lastName',
       'individual.dob',
+      'Photo',
       'groupIndividual.individual.role',
       'groupIndividual.individual.recipientType',
-      'emptyLabel',
     ];
     if (rights.includes(RIGHT_GROUP_INDIVIDUAL_UPDATE)) {
+      headers.push('emptyLabel');
+      headers.push('emptyLabel');
       headers.push('emptyLabel');
     }
     return headers;
@@ -227,6 +229,17 @@ function GroupIndividualSearcher({
         groupIndividual.individual.dob
           ? formatDateFromISO(modulesManager, intl, groupIndividual.individual.dob)
           : EMPTY_STRING
+      ),
+      (groupIndividual) => (
+        groupIndividual.role === 'HEAD'
+          ? (
+            <img
+              src={`/api/merankabandi/beneficiary-photo/photo/${groupIndividual.individual.id}/`}
+              alt="beneficiaire"
+              height={100}
+            />
+          )
+          : ''
       ),
       (groupIndividual) => (rights.includes(RIGHT_GROUP_INDIVIDUAL_UPDATE) && !isRowDeleted(groupIndividual) ? (
         <GroupIndividualRolePicker

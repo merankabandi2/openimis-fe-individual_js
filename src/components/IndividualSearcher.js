@@ -198,6 +198,7 @@ function IndividualSearcher({
       'individual.firstName',
       'individual.lastName',
       'individual.dob',
+      'Photo',
     ];
 
     headers.push(...Array.from({ length: LOC_LEVELS }, (_, i) => `location.locationType.${i}`));
@@ -216,10 +217,11 @@ function IndividualSearcher({
       (individual) => individual.firstName,
       (individual) => individual.lastName,
       (individual) => (individual.dob ? formatDateFromISO(modulesManager, intl, individual.dob) : EMPTY_STRING),
+      (individual) => <img src={`/api/merankabandi/beneficiary-photo/photo/${individual.id}/`} alt="be" height={100} />,
     ];
 
     const locations = Array.from({ length: LOC_LEVELS }, (_, i) => (group) => (
-      locationAtLevel(group.location, LOC_LEVELS - i - 1)
+      locationAtLevel(group.groupindividuals?.edges[0]?.node?.group?.location, LOC_LEVELS - i - 1)
     ));
     formatters.push(...locations);
 

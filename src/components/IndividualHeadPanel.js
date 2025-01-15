@@ -41,6 +41,7 @@ class IndividualHeadPanel extends FormPanel {
                 <Typography>
                   <FormattedMessage module="individual" id="individual.headPanelTitle" />
                 </Typography>
+                <img src={`/api/merankabandi/beneficiary-photo/photo/${individual.id}/`} alt="be" height={100} />
               </Grid>
             </Grid>
           </Grid>
