@@ -231,7 +231,7 @@ function GroupIndividualSearcher({
           : EMPTY_STRING
       ),
       (groupIndividual) => (
-        groupIndividual.role === 'HEAD'
+        groupIndividual.recipientType === 'PRIMARY'
           ? (
             <img
               src={`/api/merankabandi/beneficiary-photo/photo/${groupIndividual.individual.id}/`}

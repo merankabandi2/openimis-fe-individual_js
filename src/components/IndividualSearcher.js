@@ -217,7 +217,17 @@ function IndividualSearcher({
       (individual) => individual.firstName,
       (individual) => individual.lastName,
       (individual) => (individual.dob ? formatDateFromISO(modulesManager, intl, individual.dob) : EMPTY_STRING),
-      (individual) => <img src={`/api/merankabandi/beneficiary-photo/photo/${individual.id}/`} alt="be" height={100} />,
+      (individual) => (
+        individual.groupindividuals?.edges[0]?.node?.recipientType === 'PRIMARY'
+          ? (
+            <img
+              src={`/api/merankabandi/beneficiary-photo/photo/${individual.id}/`}
+              alt="beneficiaire"
+              height={100}
+            />
+          )
+          : ''
+      ),
     ];
 
     const locations = Array.from({ length: LOC_LEVELS }, (_, i) => (group) => (
