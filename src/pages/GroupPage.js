@@ -165,12 +165,13 @@ function GroupPage({
       doIt: openDeleteGroupConfirmDialog,
       icon: <DeleteIcon />,
       tooltip: formatMessage(intl, 'individual', 'deleteButtonTooltip'),
-    }, {
+    },
+    groupUuid && {
       doIt: setIsAddIndividualToGroupModalOpen,
       icon: <AddIcon />,
       tooltip: formatMessage(intl, 'individual', 'addButtonTooltip'),
     },
-  ];
+  ].filter(Boolean);
 
   const onAddIndividualConfirm = (individualToBeChanged) => {
     const addIndividualToGroup = {
@@ -192,12 +193,14 @@ function GroupPage({
   return (
     rights.includes(RIGHT_GROUP_SEARCH) && (
     <div className={readOnly ? classes.lockedPage : classes.page}>
-      <IndividualAddToGroupDialog
-        confirmState={isAddIndividualToGroupModalOpen}
-        onClose={() => setIsAddIndividualToGroupModalOpen(false)}
-        onConfirm={onAddIndividualConfirm}
-        setEditedGroupIndividual={setEditedGroupIndividual}
-      />
+      {groupUuid && (
+        <IndividualAddToGroupDialog
+          confirmState={isAddIndividualToGroupModalOpen}
+          onClose={() => setIsAddIndividualToGroupModalOpen(false)}
+          onConfirm={onAddIndividualConfirm}
+          setEditedGroupIndividual={setEditedGroupIndividual}
+        />
+      )}
       <Helmet title={formatMessageWithValues(intl, 'group', 'pageTitle', titleParams(group))} />
       <Form
         module="group"
