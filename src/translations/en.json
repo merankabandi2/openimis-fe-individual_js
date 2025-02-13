@@ -21,6 +21,8 @@
     "firstName": "First Name",
     "lastName": "Last Name",
     "dob": "Day of birth",
+    "location": "Location",
+    "locationEditDisabledTitle": "Individual belongs to a group; Please edit location on their group",
     "isDeleted": "Show Deleted",
     "hasNoLocation": "Missing Location",
     "addButtonTooltip": "Add Individual to Group",
@@ -127,9 +129,6 @@
   "individualHistory": {
     "pageTitle": "Individual {firstName} {lastName}",
     "headPanelTitle": "General Information",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "dob": "Day of birth",
     "dateUpdated": "Date Updated",
     "version": "Version",
     "individualsList": {
@@ -191,6 +190,7 @@
     "head": "Head",
     "primaryRecipient": "Primary Recipient",
     "secondaryRecipient": "Secondary Recipient",
+    "location": "Location",
     "dateUpdated": "Date Updated",
     "version": "Version",
     "any": "ANY",
