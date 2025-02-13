@@ -26,6 +26,18 @@ class IndividualHeadPanel extends FormPanel {
     } = this.props;
     const individual = { ...edited };
     const currentDate = new Date();
+
+    const beneficiaryPhoto = (
+      individual.groupindividuals?.edges[0]?.node?.recipientType === 'PRIMARY'
+        ? (
+          <img
+            src={`/api/merankabandi/beneficiary-photo/photo/${individual.id}/`}
+            alt="beneficiaire"
+            height={100}
+          />
+        )
+        : ''
+    );
     return (
       <>
         <Grid container className={classes.tableTitle}>
@@ -41,7 +53,7 @@ class IndividualHeadPanel extends FormPanel {
                 <Typography>
                   <FormattedMessage module="individual" id="individual.headPanelTitle" />
                 </Typography>
-                <img src={`/api/merankabandi/beneficiary-photo/photo/${individual.id}/`} alt="be" height={100} />
+                {beneficiaryPhoto}
               </Grid>
             </Grid>
           </Grid>
