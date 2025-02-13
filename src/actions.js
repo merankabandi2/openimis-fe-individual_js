@@ -1,4 +1,5 @@
 import {
+  decodeId,
   graphql,
   formatPageQuery,
   formatQuery,
@@ -48,21 +49,31 @@ export function fetchWorkflows() {
   return graphql(payload, ACTION_TYPE.GET_WORKFLOWS);
 }
 
-const INDIVIDUAL_FULL_PROJECTION = (mm) => [
-  'id',
-  'isDeleted',
-  'dateCreated',
-  'dateUpdated',
-  'firstName',
-  'lastName',
-  'dob',
-  'jsonExt',
-  'version',
-  'userUpdated {username}',
-  'groupindividuals(first: 1) {edges {node {recipientType}}}',
-  `groupindividuals(first: 1) {edges {node {group {location${mm.getProjection('location.Location.FlatProjection')}}}}}`,
-  `location${mm.getProjection('location.Location.FlatProjection')}`,
-];
+const INDIVIDUAL_FULL_PROJECTION = (mm, withGroupIndividuals = false) => {
+  const fields = [
+    'id',
+    'isDeleted',
+    'dateCreated',
+    'dateUpdated',
+    'firstName',
+    'lastName',
+    'dob',
+    'jsonExt',
+    'version',
+    'userUpdated {username}',
+    'groupindividuals(first: 1) {edges {node {recipientType}}}',
+    `groupindividuals(first: 1) {
+      edges {node {group {location${mm.getProjection('location.Location.FlatProjection')}}}}
+    }`,
+    `location${mm.getProjection('location.Location.FlatProjection')}`,
+  ];
+
+  if (withGroupIndividuals) {
+    fields.push('groupindividuals (isDeleted: false) { edges { node { group { id } } } }');
+  }
+
+  return fields;
+};
 
 const GROUP_INDIVIDUAL_FULL_PROJECTION = [
   'id',
@@ -164,7 +175,11 @@ export function fetchGroups(mm, params) {
 }
 
 export function fetchIndividual(mm, params) {
-  const payload = formatPageQuery('individual', params, INDIVIDUAL_FULL_PROJECTION(mm));
+  const payload = formatPageQuery(
+    'individual',
+    params,
+    INDIVIDUAL_FULL_PROJECTION(mm, true),
+  );
   return graphql(payload, ACTION_TYPE.GET_INDIVIDUAL);
 }
 
@@ -264,12 +279,14 @@ function dateTimeToDate(date) {
 function formatGroupGQL(group, groupIndividualId = null) {
   return `
     ${group?.id ? `id: "${group.id}"` : ''}
+    ${group?.location ? `locationId: ${decodeId(group.location.id)}` : ''}
     ${groupIndividualId ? `groupIndividualId: "${groupIndividualId}"` : ''}`;
 }
 
 function formatCreateGroupGQL(group) {
   return `
     ${group?.code ? `code: "${group.code}"` : ''}
+    ${group?.location ? `locationId: ${decodeId(group.location.id)}` : ''}
     ${'individualsData: []'}
   `;
 }
@@ -280,7 +297,9 @@ function formatIndividualGQL(individual) {
     ${individual?.firstName ? `firstName: "${formatGQLString(individual.firstName)}"` : ''}
     ${individual?.lastName ? `lastName: "${formatGQLString(individual.lastName)}"` : ''}
     ${individual?.jsonExt ? `jsonExt: ${JSON.stringify(individual.jsonExt)}` : ''}
-    ${individual?.dob ? `dob: "${dateTimeToDate(individual.dob)}"` : ''}`;
+    ${individual?.dob ? `dob: "${dateTimeToDate(individual.dob)}"` : ''}
+    ${individual?.location ? `locationId: ${decodeId(individual.location.id)}` : ''}
+  `;
 }
 
 function formatGroupIndividualGQL(groupIndividual) {
