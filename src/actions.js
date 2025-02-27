@@ -61,10 +61,7 @@ const INDIVIDUAL_FULL_PROJECTION = (mm, withGroupIndividuals = false) => {
     'jsonExt',
     'version',
     'userUpdated {username}',
-    'groupindividuals(first: 1) {edges {node {recipientType}}}',
-    `groupindividuals(first: 1) {
-      edges {node {group {location${mm.getProjection('location.Location.FlatProjection')}}}}
-    }`,
+    'groupindividuals(isDeleted: false) {edges {node {recipientType}}}',
     `location${mm.getProjection('location.Location.FlatProjection')}`,
   ];
 

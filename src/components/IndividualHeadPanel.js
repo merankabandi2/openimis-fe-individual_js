@@ -108,7 +108,7 @@ class IndividualHeadPanel extends FormPanel {
           </Grid>
           <Grid item xs={12}>
             <PublishedComponent
-              pubRef="location.DetailedLocation"
+              pubRef="location.CollineLocation"
               withNull
               required={false}
               readOnly={locReadOnly}

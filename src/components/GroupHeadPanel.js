@@ -65,7 +65,7 @@ class GroupHeadPanel extends FormPanel {
           </Grid>
           <Grid item xs={12}>
             <PublishedComponent
-              pubRef="location.DetailedLocation"
+              pubRef="location.CollineLocation"
               withNull
               readOnly={readOnly}
               required={false}

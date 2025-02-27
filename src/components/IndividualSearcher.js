@@ -230,8 +230,8 @@ function IndividualSearcher({
       ),
     ];
 
-    const locations = Array.from({ length: LOC_LEVELS }, (_, i) => (group) => (
-      locationAtLevel(group.groupindividuals?.edges[0]?.node?.group?.location, LOC_LEVELS - i - 1)
+    const locations = Array.from({ length: LOC_LEVELS }, (_, i) => (individual) => (
+      locationAtLevel(individual.location, LOC_LEVELS - i - 1)
     ));
     formatters.push(...locations);
 
