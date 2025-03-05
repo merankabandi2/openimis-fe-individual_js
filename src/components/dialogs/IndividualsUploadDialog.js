@@ -109,7 +109,11 @@ function IndividualsUploadDialog({
     formData.append('file', values.file);
 
     let urlImport;
-    if (fileFormat.includes('/csv')) {
+    if (
+      fileFormat.includes('/csv')
+      || fileFormat.includes('application/vnd.ms-excel')
+      || fileFormat.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    ) {
       formData.append('workflow_name', values.workflow.name);
       formData.append('workflow_group', values.workflow.group);
       formData.append('group_aggregation_column', groupAggregationHeader);
@@ -191,7 +195,10 @@ function IndividualsUploadDialog({
                       required
                       id="import-button"
                       inputProps={{
-                        accept: '.csv, application/csv, text/csv',
+                        accept: '.csv, application/csv, text/csv, '
+                               + 'application/vnd.ms-excel, '
+                               + 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, '
+                               + '.xls, .xlsx',
                       }}
                       type="file"
                     />
@@ -274,7 +281,7 @@ function IndividualsUploadDialog({
                 >
                   {formatMessage(intl, 'individual', 'individual.upload.template')}
                 </Button>
-                <></><></>
+
                 <Button
                   variant="contained"
                   color="primary"
