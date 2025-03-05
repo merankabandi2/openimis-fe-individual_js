@@ -103,9 +103,23 @@ function IndividualsUploadDialog({
   const getFieldValue = () => forms?.workflows?.workflow?.name ?? {};
 
   const onSubmit = async (values) => {
-    const fileFormat = values.file.type;
-    const formData = new FormData();
+    const { file } = values;
+    const fileFormat = file ? file.type : undefined;
 
+    if (
+      !fileFormat
+      || (!fileFormat.includes('/csv')
+        && !fileFormat.includes('application/vnd.ms-excel')
+        && !fileFormat.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'))
+    ) {
+      coreAlert(
+        formatMessage(intl, 'individual', 'individual.upload.alert.header.invalid_format'),
+        formatMessage(intl, 'individual', 'individual.upload.alert.message.invalid_format'),
+      );
+      return;
+    }
+
+    const formData = new FormData();
     formData.append('file', values.file);
 
     let urlImport;
