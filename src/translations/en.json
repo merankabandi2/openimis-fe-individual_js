@@ -58,6 +58,8 @@
       "label": "Upload Individuals",
       "alert.sameFileName": "Filename exists for given Benefit Plan. Please change the filename.",
       "alert.header": "Error during file upload.",
+      "alert.header.invalid_format": "Invalid file format!",
+      "alert.message.invalid_format": "Please upload a valid CSV or Excel file!",
       "workflowPicker": "Workflow",
       "cancel": "Cancel",
       "template": "Template",
