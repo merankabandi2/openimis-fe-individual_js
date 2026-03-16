@@ -129,3 +129,9 @@ export const APPROVED = 'APPROVED';
 export const FAILED = 'FAILED';
 export const ACCEPT = 'ACCEPT';
 export const REJECT = 'REJECT';
+
+export const INDIVIDUAL_HEAD_PANEL_CONTRIBUTION_KEY = 'individual.Individual.headPanel';
+export const GROUP_HEAD_PANEL_CONTRIBUTION_KEY = 'group.Group.headPanel';
+
+export const INDIVIDUAL_SEARCHER_COLUMNS_CONTRIBUTION_KEY = 'individual.IndividualSearcher.columns';
+export const GROUP_INDIVIDUAL_SEARCHER_COLUMNS_CONTRIBUTION_KEY = 'individual.GroupIndividualSearcher.columns';
