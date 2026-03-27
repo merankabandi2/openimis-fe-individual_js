@@ -23,6 +23,12 @@ export const applyNumberCircle = (number) => (
 );
 
 export const LOC_LEVELS = 4;
+
+export const getLocLevels = (modulesManager) => {
+  const ref = modulesManager.getRef('location.Location.MaxLevels');
+  return ref ? parseInt(ref, 10) : LOC_LEVELS;
+};
+
 export const locationAtLevel = (lowestLevelLoc, level) => {
   let location = lowestLevelLoc;
   let levelDiff = level;
